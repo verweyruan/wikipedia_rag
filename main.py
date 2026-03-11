@@ -29,7 +29,7 @@ def get_index():
         return load_index_from_storage(storage)
     
     docs = WikipediaReader().load_data(pages=PAGES, auto_suggest=False)
-    embedding_model = OpenAIEmbedding('text-embedding-3-small')
+    embedding_model = OpenAIEmbedding(model='text-embedding-3-small')
     index = VectorStoreIndex.from_documents(docs, embedding_model=embedding_model)
     index.storage_context.persist(persist_dir=INDEX_DIR)
 
