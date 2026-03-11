@@ -43,3 +43,23 @@ def get_query_engine():
 
     return index.as_query_engine(llm=llm, similarity_top_k=3)
 
+
+def main():
+    st.title('Wikipedia RAG Application')
+
+    question = st.text_input('Ask a Question')
+    if st.button('Submit') and question:
+        with st.spinner('Thinking...'):
+            qa = get_query_engine()
+            response = qa.query(question)
+
+        st.subheader('Answer')
+        st.write(response.response)
+        st.subheader('Retrieved context')
+
+        for src in response.source_nodes:
+            st.markdown(src.node.get_content())
+
+
+if __name__ == '__main__':
+    main()
