@@ -16,9 +16,7 @@ PAGES = [
     "Machine learning",
     "Artificial intelligence",
     "Software engineering",
-    "Saas",
-    "Software Company",
-    "Vibe Coding"
+    "Software as a service",
 ]
 
 
@@ -40,7 +38,7 @@ def get_index():
 def get_query_engine():
     index = get_index()
 
-    llm = Groq(model="llama3-8b-8192", api_key=os.getenv("GROQ_API_KEY"))
+    llm = Groq(model="llama-3.3-70b-versatile", api_key=os.getenv("GROQ_API_KEY"))
     return index.as_query_engine(llm=llm, similarity_top_k=3)
 
 
